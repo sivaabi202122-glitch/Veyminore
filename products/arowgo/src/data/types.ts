@@ -116,6 +116,14 @@ export interface HintResult {
   message: string;
 }
 
+/** Player daily streak data */
+export interface DailyStreakData {
+  currentStreak: number;
+  maxStreak: number;
+  lastCompletedDate: string;
+  completedDates: string[];
+}
+
 /** Game save data stored locally */
 export interface SaveData {
   /** Current level ID */
@@ -126,6 +134,8 @@ export interface SaveData {
   inProgressBoard?: BoardState;
   /** Settings */
   settings: GameSettings;
+  /** Daily challenge streak progress */
+  dailyStreak?: DailyStreakData;
   /** Save timestamp */
   savedAt: string;
 }

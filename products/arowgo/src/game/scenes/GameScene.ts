@@ -1,11 +1,12 @@
 import Phaser from 'phaser';
 import { COLORS, GAME_WIDTH, GAME_HEIGHT, GRID, ANIM } from '@/config/game-config';
-import { LevelsFile } from '@/data/types';
+import { LevelsFile, LevelDefinition } from '@/data/types';
 import { BoardManager } from '@/game/systems/BoardManager';
 import { GridCell } from '@/game/objects/GridCell';
 import { ArrowTile } from '@/game/objects/ArrowTile';
 import { AudioManager } from '@/services/AudioManager';
 import { SaveManager } from '@/services/SaveManager';
+import { AnalyticsManager } from '@/services/AnalyticsManager';
 
 /**
  * GameScene — the core gameplay scene.
@@ -13,6 +14,7 @@ import { SaveManager } from '@/services/SaveManager';
  */
 export class GameScene extends Phaser.Scene {
   private boardManager!: BoardManager;
+  private isDaily: boolean = false;
   private gridCells: GridCell[] = [];
   private arrowTiles: Map<string, ArrowTile> = new Map();
   private cellSize: number = 0;
@@ -32,17 +34,27 @@ export class GameScene extends Phaser.Scene {
     super({ key: 'GameScene' });
   }
 
-  init(data: { levelId: string }): void {
-    const levelsData = this.cache.json.get('levels') as LevelsFile;
-    const levelDef = levelsData.levels.find(l => l.id === data.levelId);
+  init(data: { levelId?: string; customLevel?: LevelDefinition }): void {
+    let levelDef: LevelDefinition | undefined = data.customLevel;
+
+    if (!levelDef && data.levelId) {
+      const levelsData = this.cache.json.get('levels') as LevelsFile;
+      levelDef = levelsData.levels.find(l => l.id === data.levelId);
+    }
 
     if (!levelDef) {
-      console.error(`Level "${data.levelId}" not found!`);
+      console.error(`Level not found!`, data);
       this.scene.start('MenuScene');
       return;
     }
 
+    this.isDaily = levelDef.id.startsWith('daily_');
     this.boardManager = new BoardManager(levelDef);
+
+    AnalyticsManager.getInstance().logEvent(
+      this.isDaily ? 'daily_challenge_started' : 'level_started',
+      { levelId: levelDef.id }
+    );
   }
 
   create(): void {
@@ -285,12 +297,31 @@ export class GameScene extends Phaser.Scene {
 
       if (this.boardManager.isComplete) {
         AudioManager.getInstance().playWin();
-        SaveManager.getInstance().completeLevel(this.boardManager.level.id);
+        const levelId = this.boardManager.level.id;
+
+        let streakInfo: { newStreak: number; isNewMax: boolean } | undefined;
+        if (this.isDaily) {
+          const dateStr = levelId.replace('daily_', '');
+          streakInfo = SaveManager.getInstance().completeDailyChallenge(dateStr);
+          AnalyticsManager.getInstance().logEvent('daily_challenge_completed', {
+            dateStr,
+            moves: this.boardManager.moveCount,
+            streak: streakInfo.newStreak,
+          });
+        } else {
+          SaveManager.getInstance().completeLevel(levelId);
+          AnalyticsManager.getInstance().logEvent('level_completed', {
+            levelId,
+            moves: this.boardManager.moveCount,
+          });
+        }
 
         this.time.delayedCall(ANIM.RESULT_DELAY, () => {
           this.scene.start('ResultScene', {
             levelId: this.boardManager.level.id,
             moveCount: this.boardManager.moveCount,
+            isDaily: this.isDaily,
+            streakInfo,
           });
         });
       }
@@ -327,6 +358,7 @@ export class GameScene extends Phaser.Scene {
     const success = this.boardManager.undo();
     if (success) {
       AudioManager.getInstance().playHint();
+      AnalyticsManager.getInstance().logEvent('undo_used', { levelId: this.boardManager.level.id });
       this.rebuildArrows();
       this.updateUI();
       this.clearMessage();
@@ -350,6 +382,7 @@ export class GameScene extends Phaser.Scene {
     const hint = this.boardManager.getHint();
     if (hint.available && hint.arrowId) {
       AudioManager.getInstance().playHint();
+      AnalyticsManager.getInstance().logEvent('hint_used', { levelId: this.boardManager.level.id });
       const tile = this.arrowTiles.get(hint.arrowId);
       if (tile) {
         tile.highlightForHint();

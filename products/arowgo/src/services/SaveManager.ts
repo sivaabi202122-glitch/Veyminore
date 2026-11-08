@@ -141,6 +141,63 @@ export class SaveManager {
   }
 
   /**
+   * Get daily streak info.
+   */
+  getDailyStreak() {
+    return (
+      this.data.dailyStreak || {
+        currentStreak: 0,
+        maxStreak: 0,
+        lastCompletedDate: '',
+        completedDates: [],
+      }
+    );
+  }
+
+  /**
+   * Check if today's daily challenge has been completed.
+   */
+  isDailyCompleted(dateStr: string): boolean {
+    const streak = this.getDailyStreak();
+    return streak.completedDates.includes(dateStr);
+  }
+
+  /**
+   * Record completion of daily challenge and calculate streak.
+   */
+  completeDailyChallenge(dateStr: string): { newStreak: number; isNewMax: boolean } {
+    const streak = this.getDailyStreak();
+    if (streak.completedDates.includes(dateStr)) {
+      return { newStreak: streak.currentStreak, isNewMax: false };
+    }
+
+    let newStreak = 1;
+    if (streak.lastCompletedDate) {
+      const lastDate = new Date(streak.lastCompletedDate);
+      const curDate = new Date(dateStr);
+      const diffDays = Math.round((curDate.getTime() - lastDate.getTime()) / (1000 * 3600 * 24));
+      if (diffDays === 1) {
+        newStreak = streak.currentStreak + 1;
+      } else if (diffDays === 0) {
+        newStreak = streak.currentStreak;
+      }
+    }
+
+    const isNewMax = newStreak > streak.maxStreak;
+    const maxStreak = Math.max(newStreak, streak.maxStreak);
+
+    this.data.dailyStreak = {
+      currentStreak: newStreak,
+      maxStreak,
+      lastCompletedDate: dateStr,
+      completedDates: [...streak.completedDates, dateStr],
+    };
+    this.persist();
+
+    return { newStreak, isNewMax };
+  }
+
+  /**
    * Get in-progress board state.
    */
   getInProgress(): BoardState | undefined {
