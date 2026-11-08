@@ -1,0 +1,45 @@
+{
+  "version": "1.0.0",
+  "levels": [
+    {
+      "id": "level_001",
+      "name": "First Steps",
+      "width": 2,
+      "height": 2,
+      "difficulty": "tutorial",
+      "arrows": [
+        { "id": "a1", "x": 0, "y": 0, "direction": "right" },
+        { "id": "a2", "x": 1, "y": 1, "direction": "down" }
+      ],
+      "solution": ["a1", "a2"]
+    },
+    {
+      "id": "level_002",
+      "name": "Think Ahead",
+      "width": 3,
+      "height": 3,
+      "difficulty": "tutorial",
+      "arrows": [
+        { "id": "a1", "x": 0, "y": 1, "direction": "right" },
+        { "id": "a2", "x": 1, "y": 1, "direction": "up" },
+        { "id": "a3", "x": 1, "y": 0, "direction": "right" }
+      ],
+      "solution": ["a3", "a2", "a1"]
+    },
+    {
+      "id": "level_003",
+      "name": "Getting Tricky",
+      "width": 4,
+      "height": 4,
+      "difficulty": "easy",
+      "arrows": [
+        { "id": "a1", "x": 1, "y": 0, "direction": "down" },
+        { "id": "a2", "x": 1, "y": 2, "direction": "right" },
+        { "id": "a3", "x": 3, "y": 2, "direction": "up" },
+        { "id": "a4", "x": 0, "y": 3, "direction": "right" },
+        { "id": "a5", "x": 3, "y": 3, "direction": "down" }
+      ],
+      "solution": ["a3", "a5", "a2", "a4", "a1"]
+    }
+  ]
+}
