@@ -42,6 +42,8 @@ export interface LevelDefinition {
   difficulty?: 'tutorial' | 'easy' | 'medium' | 'hard' | 'advanced';
   /** Optional: human-readable name */
   name?: string;
+  /** Optional: tutorial hint/guidance text */
+  tutorial?: string;
 }
 
 /** Levels file schema — the root of levels.json */

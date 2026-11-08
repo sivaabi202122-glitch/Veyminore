@@ -3,10 +3,11 @@
   "levels": [
     {
       "id": "level_001",
-      "name": "First Steps",
+      "name": "First Flight",
       "width": 2,
       "height": 2,
       "difficulty": "tutorial",
+      "tutorial": "Tap an arrow to launch it! It can only exit if its path to the edge is clear.",
       "arrows": [
         { "id": "a1", "x": 0, "y": 0, "direction": "right" },
         { "id": "a2", "x": 1, "y": 1, "direction": "down" }
@@ -15,10 +16,11 @@
     },
     {
       "id": "level_002",
-      "name": "Think Ahead",
+      "name": "Clear the Way",
       "width": 3,
       "height": 3,
       "difficulty": "tutorial",
+      "tutorial": "Some arrows block each other. Clear the blocking arrow first!",
       "arrows": [
         { "id": "a1", "x": 0, "y": 1, "direction": "right" },
         { "id": "a2", "x": 1, "y": 1, "direction": "up" },
@@ -28,7 +30,83 @@
     },
     {
       "id": "level_003",
-      "name": "Getting Tricky",
+      "name": "Direction Sense",
+      "width": 3,
+      "height": 3,
+      "difficulty": "tutorial",
+      "tutorial": "Look at the direction of each arrow. Every edge is a possible exit.",
+      "arrows": [
+        { "id": "a1", "x": 0, "y": 0, "direction": "left" },
+        { "id": "a2", "x": 2, "y": 0, "direction": "up" },
+        { "id": "a3", "x": 2, "y": 2, "direction": "right" },
+        { "id": "a4", "x": 0, "y": 2, "direction": "down" }
+      ],
+      "solution": ["a1", "a2", "a3", "a4"]
+    },
+    {
+      "id": "level_004",
+      "name": "Cornerstone",
+      "width": 3,
+      "height": 3,
+      "difficulty": "easy",
+      "tutorial": "Unravel the chain starting from the unblocked arrows.",
+      "arrows": [
+        { "id": "a1", "x": 0, "y": 1, "direction": "right" },
+        { "id": "a2", "x": 1, "y": 1, "direction": "down" },
+        { "id": "a3", "x": 1, "y": 2, "direction": "right" },
+        { "id": "a4", "x": 2, "y": 2, "direction": "down" }
+      ],
+      "solution": ["a4", "a3", "a2", "a1"]
+    },
+    {
+      "id": "level_005",
+      "name": "Crossroad",
+      "width": 3,
+      "height": 3,
+      "difficulty": "easy",
+      "arrows": [
+        { "id": "a1", "x": 1, "y": 0, "direction": "up" },
+        { "id": "a2", "x": 1, "y": 1, "direction": "right" },
+        { "id": "a3", "x": 2, "y": 1, "direction": "right" },
+        { "id": "a4", "x": 0, "y": 1, "direction": "right" },
+        { "id": "a5", "x": 1, "y": 2, "direction": "down" }
+      ],
+      "solution": ["a1", "a5", "a3", "a2", "a4"]
+    },
+    {
+      "id": "level_006",
+      "name": "Pinwheel",
+      "width": 4,
+      "height": 4,
+      "difficulty": "easy",
+      "arrows": [
+        { "id": "a1", "x": 1, "y": 1, "direction": "right" },
+        { "id": "a2", "x": 2, "y": 1, "direction": "down" },
+        { "id": "a3", "x": 2, "y": 2, "direction": "left" },
+        { "id": "a4", "x": 1, "y": 2, "direction": "down" },
+        { "id": "a5", "x": 3, "y": 1, "direction": "right" }
+      ],
+      "solution": ["a5", "a4", "a3", "a2", "a1"]
+    },
+    {
+      "id": "level_007",
+      "name": "The Cascade",
+      "width": 4,
+      "height": 4,
+      "difficulty": "easy",
+      "arrows": [
+        { "id": "a1", "x": 0, "y": 0, "direction": "right" },
+        { "id": "a2", "x": 1, "y": 0, "direction": "right" },
+        { "id": "a3", "x": 2, "y": 0, "direction": "down" },
+        { "id": "a4", "x": 2, "y": 1, "direction": "down" },
+        { "id": "a5", "x": 2, "y": 2, "direction": "right" },
+        { "id": "a6", "x": 3, "y": 2, "direction": "right" }
+      ],
+      "solution": ["a6", "a5", "a4", "a3", "a2", "a1"]
+    },
+    {
+      "id": "level_008",
+      "name": "Opposing Forces",
       "width": 4,
       "height": 4,
       "difficulty": "easy",
@@ -40,6 +118,131 @@
         { "id": "a5", "x": 3, "y": 3, "direction": "down" }
       ],
       "solution": ["a3", "a5", "a2", "a4", "a1"]
+    },
+    {
+      "id": "level_009",
+      "name": "Twin Columns",
+      "width": 4,
+      "height": 4,
+      "difficulty": "medium",
+      "arrows": [
+        { "id": "a1", "x": 1, "y": 0, "direction": "down" },
+        { "id": "a2", "x": 1, "y": 1, "direction": "right" },
+        { "id": "a3", "x": 2, "y": 1, "direction": "up" },
+        { "id": "a4", "x": 1, "y": 2, "direction": "down" },
+        { "id": "a5", "x": 2, "y": 2, "direction": "left" },
+        { "id": "a6", "x": 2, "y": 3, "direction": "down" }
+      ],
+      "solution": ["a3", "a6", "a2", "a1", "a5", "a4"]
+    },
+    {
+      "id": "level_010",
+      "name": "Boxed In",
+      "width": 4,
+      "height": 4,
+      "difficulty": "medium",
+      "arrows": [
+        { "id": "a1", "x": 0, "y": 1, "direction": "right" },
+        { "id": "a2", "x": 1, "y": 1, "direction": "down" },
+        { "id": "a3", "x": 2, "y": 1, "direction": "right" },
+        { "id": "a4", "x": 3, "y": 1, "direction": "up" },
+        { "id": "a5", "x": 1, "y": 2, "direction": "left" },
+        { "id": "a6", "x": 2, "y": 2, "direction": "down" },
+        { "id": "a7", "x": 2, "y": 3, "direction": "right" }
+      ],
+      "solution": ["a4", "a3", "a7", "a6", "a2", "a5", "a1"]
+    },
+    {
+      "id": "level_011",
+      "name": "Stairway",
+      "width": 5,
+      "height": 5,
+      "difficulty": "medium",
+      "arrows": [
+        { "id": "a1", "x": 0, "y": 0, "direction": "right" },
+        { "id": "a2", "x": 1, "y": 0, "direction": "down" },
+        { "id": "a3", "x": 1, "y": 1, "direction": "right" },
+        { "id": "a4", "x": 2, "y": 1, "direction": "down" },
+        { "id": "a5", "x": 2, "y": 2, "direction": "right" },
+        { "id": "a6", "x": 3, "y": 2, "direction": "down" },
+        { "id": "a7", "x": 3, "y": 3, "direction": "right" }
+      ],
+      "solution": ["a7", "a6", "a5", "a4", "a3", "a2", "a1"]
+    },
+    {
+      "id": "level_012",
+      "name": "Outer Rim",
+      "width": 5,
+      "height": 5,
+      "difficulty": "medium",
+      "arrows": [
+        { "id": "a1", "x": 2, "y": 0, "direction": "up" },
+        { "id": "a2", "x": 2, "y": 1, "direction": "up" },
+        { "id": "a3", "x": 2, "y": 2, "direction": "right" },
+        { "id": "a4", "x": 3, "y": 2, "direction": "right" },
+        { "id": "a5", "x": 2, "y": 3, "direction": "down" },
+        { "id": "a6", "x": 2, "y": 4, "direction": "down" },
+        { "id": "a7", "x": 1, "y": 2, "direction": "left" },
+        { "id": "a8", "x": 0, "y": 2, "direction": "left" }
+      ],
+      "solution": ["a1", "a4", "a6", "a8", "a2", "a3", "a5", "a7"]
+    },
+    {
+      "id": "level_013",
+      "name": "Interlock",
+      "width": 5,
+      "height": 5,
+      "difficulty": "medium",
+      "arrows": [
+        { "id": "a1", "x": 1, "y": 1, "direction": "right" },
+        { "id": "a2", "x": 3, "y": 1, "direction": "right" },
+        { "id": "a3", "x": 3, "y": 3, "direction": "left" },
+        { "id": "a4", "x": 1, "y": 3, "direction": "up" },
+        { "id": "a5", "x": 2, "y": 1, "direction": "up" },
+        { "id": "a6", "x": 3, "y": 2, "direction": "right" },
+        { "id": "a7", "x": 2, "y": 3, "direction": "down" },
+        { "id": "a8", "x": 1, "y": 2, "direction": "left" }
+      ],
+      "solution": ["a5", "a6", "a7", "a8", "a2", "a1", "a4", "a3"]
+    },
+    {
+      "id": "level_014",
+      "name": "Traffic Jam",
+      "width": 5,
+      "height": 5,
+      "difficulty": "hard",
+      "arrows": [
+        { "id": "a1", "x": 0, "y": 1, "direction": "right" },
+        { "id": "a2", "x": 2, "y": 1, "direction": "down" },
+        { "id": "a3", "x": 4, "y": 1, "direction": "right" },
+        { "id": "a4", "x": 2, "y": 2, "direction": "left" },
+        { "id": "a5", "x": 1, "y": 2, "direction": "down" },
+        { "id": "a6", "x": 2, "y": 3, "direction": "down" },
+        { "id": "a7", "x": 3, "y": 2, "direction": "right" },
+        { "id": "a8", "x": 1, "y": 4, "direction": "down" },
+        { "id": "a9", "x": 3, "y": 0, "direction": "up" }
+      ],
+      "solution": ["a9", "a7", "a8", "a3", "a5", "a4", "a6", "a2", "a1"]
+    },
+    {
+      "id": "level_015",
+      "name": "Master Puzzle",
+      "width": 5,
+      "height": 5,
+      "difficulty": "hard",
+      "arrows": [
+        { "id": "a1", "x": 0, "y": 0, "direction": "down" },
+        { "id": "a2", "x": 0, "y": 2, "direction": "right" },
+        { "id": "a3", "x": 2, "y": 2, "direction": "down" },
+        { "id": "a4", "x": 2, "y": 4, "direction": "right" },
+        { "id": "a5", "x": 4, "y": 4, "direction": "right" },
+        { "id": "a6", "x": 4, "y": 2, "direction": "right" },
+        { "id": "a7", "x": 2, "y": 1, "direction": "up" },
+        { "id": "a8", "x": 2, "y": 3, "direction": "left" },
+        { "id": "a9", "x": 1, "y": 2, "direction": "up" },
+        { "id": "a10", "x": 3, "y": 2, "direction": "down" }
+      ],
+      "solution": ["a7", "a5", "a6", "a9", "a10", "a8", "a4", "a3", "a2", "a1"]
     }
   ]
 }
